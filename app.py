@@ -25,7 +25,7 @@ import pymupdf
 
 import pdf_extract as px
 
-VERSION = "range-scoped v3"   # if you don't see this in the app, you're on old code
+VERSION = "range-scoped v4"   # if you don't see this in the app, you're on old code
 
 st.set_page_config(page_title="PDF → Docmost", layout="wide")
 st.title("PDF → Docmost Markdown")
@@ -214,11 +214,14 @@ with md_tab:
                        "browser. Use the download, or expand below. Tip: use a "
                        "smaller page-range size.")
             with st.expander("Show Markdown inline anyway"):
-                st.code(md, language="markdown")
+                with st.container(height=500):
+                    st.code(md, language="markdown")
         else:
-            st.code(md, language="markdown")
+            with st.container(height=500):
+                st.code(md, language="markdown")
             with st.expander("Rendered preview"):
-                st.markdown(md)
+                with st.container(height=500):
+                    st.markdown(md)
 
     with st.expander("Convert EVERYTHING → ZIP (slow on big PDFs)"):
         st.caption(f"Converts all {len(chapters)} pieces and bundles the .md files. "
